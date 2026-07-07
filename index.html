@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cayo — Compliance Intelligence</title>
+
+<!-- Styles: tokens first (fonts + variables), then base, then components -->
+<link rel="stylesheet" href="src/styles/tokens.css">
+<link rel="stylesheet" href="src/styles/base.css">
+<link rel="stylesheet" href="src/styles/components.css">
+</head>
+<body>
+
+<div class="shell">
+
+<!-- ══ SIDEBAR ══ -->
+<nav class="sidebar">
+  <div class="brand">
+    <div class="brand-lockup">
+      <div class="brand-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 4.5C12.8 4.5 15 6 15 8.2C15 10 13.6 11.2 12 12L10 15.5L8 12C6.4 11.2 5 10 5 8.2C5 6 7.2 4.5 10 4.5Z" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+          <circle cx="10" cy="8.4" r="1.6" fill="#ffffff"/>
+        </svg>
+      </div>
+      <span class="brand-name">Cayo</span>
+    </div>
+    <div class="brand-tag">KYB · AML · Intelligence</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Workspace</div>
+    <div class="nav-link active"><span class="nav-ico">◫</span> Applications <span class="nav-pill pill-warn">7</span></div>
+    <div class="nav-link"><span class="nav-ico">◈</span> Verified Entities <span class="nav-pill pill-clear">42</span></div>
+    <div class="nav-link"><span class="nav-ico">⚑</span> Watchlist Hits <span class="nav-pill pill-danger">2</span></div>
+    <div class="nav-link"><span class="nav-ico">⬡</span> AI Insights</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Compliance</div>
+    <div class="nav-link"><span class="nav-ico">⊞</span> AML Screening</div>
+    <div class="nav-link"><span class="nav-ico">≋</span> Registry Lookup</div>
+    <div class="nav-link"><span class="nav-ico">⊟</span> Sanctions Lists</div>
+    <div class="nav-link"><span class="nav-ico">◎</span> Audit Trail</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Configuration</div>
+    <div class="nav-link"><span class="nav-ico">⊙</span> Risk Weights</div>
+    <div class="nav-link"><span class="nav-ico">⊕</span> Bank Config</div>
+    <div class="nav-link"><span class="nav-ico">⊗</span> API & Webhooks</div>
+  </div>
+
+  <div class="sidebar-base">
+    <div class="user-row">
+      <div class="u-avatar">AB</div>
+      <div>
+        <div class="u-name">Anthony B.</div>
+        <div class="u-role">COMPLIANCE OFFICER</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="breadcrumb">
+      Applications <span class="bc-sep">›</span> <b>TrinCo Holdings Ltd.</b>
+    </div>
+    <div class="status-chip chip-warn">
+      <span class="chip-dot"></span> In Review
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-ghost">↓ Export PDF</button>
+      <button class="btn btn-danger" onclick="showToast('⚑ Application flagged for MLRO review','var(--warn)')">⚑ Flag</button>
+      <button id="approveBtn" class="btn btn-gold" data-tip="Complete all steps to enable approval" onclick="handleApprove()">
+        ✓ Approve
+      </button>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-area">
+
+    <!-- WORKFLOW -->
+    <div class="workflow">
+
+      <!-- Entity -->
+      <div class="entity-card">
+        <div class="entity-logo">🏢</div>
+        <div class="entity-body">
+          <div class="entity-name">TrinCo Holdings Ltd.</div>
+          <div class="entity-sub">TT-CROS-2019-004821 &nbsp;·&nbsp; Incorporated 14 Mar 2019 &nbsp;·&nbsp; Port of Spain, Trinidad &amp; Tobago</div>
+          <div class="tag-row">
+            <span class="tag t-sky">Financial Services</span>
+            <span class="tag t-warn">High Value Client</span>
+            <span class="tag t-gold">Trinidad</span>
+            <span class="tag t-teal">AI Processed</span>
+            <span class="tag t-rose">Enhanced DD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-val" style="color:var(--warn)">62</div>
+          <div class="kpi-label">Risk Score</div>
+          <div class="kpi-sub" style="color:var(--warn)">↑ Medium-High</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-val" style="color:var(--gold-bright)">4<span style="font-size:16px;color:var(--muted)">/6</span></div>
+          <div class="kpi-label">Docs Verified</div>
+          <div class="kpi-sub" style="color:var(--warn)">2 outstanding</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-val" style="color:var(--clear)">0</div>
+          <div class="kpi-label">Sanctions Hits</div>
+          <div class="kpi-sub" style="color:var(--clear)">All lists clear</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-val" style="color:var(--sky)">3</div>
+          <div class="kpi-label">UBOs Identified</div>
+          <div class="kpi-sub" style="color:var(--sky)">AI extracted</div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="sec-label">KYB Verification Workflow</div>
+      <div class="step-list">
+
+        <!-- 1 Done -->
+        <div class="step step-done" onclick="toggleStep(this)">
+          <div class="step-hd">
+            <div class="step-circle sc-done">✓</div>
+            <div class="step-info">
+              <div class="step-title">Business Identity Verification</div>
+              <div class="step-desc">Certificate of incorporation, registration number, registered address confirmed</div>
+            </div>
+            <span class="step-badge sb-done">Complete</span>
+            <span class="chevron-ico">▼</span>
+          </div>
+          <div class="step-body">
+            <div style="font-size:11px;color:#a8b8cc;line-height:1.7;background:var(--deep);padding:10px 12px;border-radius:6px;border:1px solid var(--line)">
+              <b style="color:var(--clear)">✓</b> Company name matches CROS filing exactly &nbsp;·&nbsp; <b style="color:var(--clear)">✓</b> Registration active &nbsp;·&nbsp; <b style="color:var(--clear)">✓</b> No dissolution notices &nbsp;·&nbsp; Verified by <b style="color:var(--text)">A. Baldeosingh</b> at <span style="font-family:'Spline Sans Mono',monospace;color:var(--muted)">14:15 · Today</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Done -->
+        <div class="step step-done" onclick="toggleStep(this)">
+          <div class="step-hd">
+            <div class="step-circle sc-done">✓</div>
+            <div class="step-info">
+              <div class="step-title">Multi-Registry Cross-Check</div>
+              <div class="step-desc">CROS Trinidad &nbsp;·&nbsp; CAIPO Barbados &nbsp;·&nbsp; SVG FSA &nbsp;·&nbsp; BVI Registry</div>
+            </div>
+            <span class="step-badge sb-done">Complete</span>
+            <span class="chevron-ico">▼</span>
+          </div>
+          <div class="step-body">
+            <div style="font-size:11px;color:#a8b8cc;line-height:1.7;background:var(--deep);padding:10px 12px;border-radius:6px;border:1px solid var(--line)">
+              <b style="color:var(--clear)">✓</b> CROS Trinidad — Active, good standing &nbsp;·&nbsp; <b style="color:var(--clear)">✓</b> CAIPO Barbados — No adverse record &nbsp;·&nbsp; <b style="color:var(--clear)">✓</b> SVG FSA — Not registered (expected) &nbsp;·&nbsp; <b style="color:var(--clear)">✓</b> BVI — No related entities found
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Active -->
+        <div class="step step-active open" onclick="toggleStep(this)">
+          <div class="step-hd">
+            <div class="step-circle sc-active">3</div>
+            <div class="step-info">
+              <div class="step-title">Document Upload &amp; AI Analysis</div>
+              <div class="step-desc">AI extracts, validates, and flags anomalies from uploaded documents in real time</div>
+            </div>
+            <span class="step-badge sb-ai">⬡ AI Active</span>
+            <span class="chevron-ico">▼</span>
+          </div>
+          <div class="step-body">
+            <div class="doc-grid">
+              <div class="doc-tile d-ok">
+                <div class="doc-ico">📄</div>
+                <div>
+                  <div class="doc-name">Certificate of Incorporation</div>
+                  <div class="doc-stat doc-ok">✓ AI Verified · 4 fields extracted</div>
+                </div>
+              </div>
+              <div class="doc-tile d-ok">
+                <div class="doc-ico">📋</div>
+                <div>
+                  <div class="doc-name">Articles of Association</div>
+                  <div class="doc-stat doc-ok">✓ AI Verified · 3 UBOs extracted</div>
+                </div>
+              </div>
+              <div class="doc-tile d-ok">
+                <div class="doc-ico">🪪</div>
+                <div>
+                  <div class="doc-name">Director IDs ×3</div>
+                  <div class="doc-stat doc-ok">✓ AI Verified · All matched</div>
+                </div>
+              </div>
+              <div class="doc-tile d-ok">
+                <div class="doc-ico">🏦</div>
+                <div>
+                  <div class="doc-name">Bank Reference Letter</div>
+                  <div class="doc-stat doc-ok" style="color:var(--warn)">⚠ Address discrepancy flagged</div>
+                </div>
+              </div>
+              <div class="doc-tile d-wait">
+                <div class="doc-ico">📊</div>
+                <div>
+                  <div class="doc-name">Tax Clearance Cert.</div>
+                  <div class="doc-stat doc-pend">⏳ Awaiting upload</div>
+                  <button class="req-btn" onclick="event.stopPropagation();showToast('📧 Document request sent to TrinCo Holdings','var(--gold)')">→ Send Request</button>
+                </div>
+              </div>
+              <div class="doc-tile d-wait">
+                <div class="doc-ico">📑</div>
+                <div>
+                  <div class="doc-name">Audited Financials</div>
+                  <div class="doc-stat doc-pend">⏳ Awaiting upload</div>
+                  <button class="req-btn" onclick="event.stopPropagation();showToast('📧 Document request sent to TrinCo Holdings','var(--gold)')">→ Send Request</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropzone" onclick="showToast('📁 File picker opened','var(--teal)')">
+              <div class="dz-icon">⬆</div>
+              <div class="dz-text"><b>Drop documents here</b> or click to upload &nbsp;·&nbsp; PDF, JPG, PNG &nbsp;·&nbsp; AES-256 encrypted</div>
+            </div>
+
+            <div class="ai-card">
+              <div class="ai-hd">
+                <div class="ai-pulse"></div>
+                <div class="ai-title">Cayo Intelligence — Document Analysis</div>
+              </div>
+              <div class="ai-finding">
+                <div class="af-dot" style="background:var(--clear)"></div>
+                <div class="af-text">Certificate of Incorporation matches CROS registry exactly — company name, registration number <span style="font-family:'Spline Sans Mono',monospace">TT-CROS-2019-004821</span>, and date of incorporation all consistent across all uploaded documents.</div>
+              </div>
+              <div class="ai-finding">
+                <div class="af-dot" style="background:var(--clear)"></div>
+                <div class="af-text">3 Ultimate Beneficial Owners identified from Articles of Association: <b style="color:var(--text)">Marcus J. Williams</b> (42%), <b style="color:var(--text)">Sandra T. Lee</b> (35%), <b style="color:var(--text)">Raj Persad</b> (23%). All three Director IDs cross-referenced and verified.</div>
+              </div>
+              <div class="ai-finding">
+                <div class="af-dot" style="background:var(--warn)"></div>
+                <div class="af-text">⚠ Address discrepancy — Bank reference letter shows <span style="font-family:'Spline Sans Mono',monospace">"47 Richmond St"</span> while CROS filing reads <span style="font-family:'Spline Sans Mono',monospace">"74 Richmond St"</span>. Likely transposition error. Manual confirmation required before approval.</div>
+              </div>
+              <div class="ai-finding">
+                <div class="af-dot" style="background:var(--warn)"></div>
+                <div class="af-text">Tax Clearance Certificate and Audited Financials outstanding. Application is blocked from AML screening until both documents are received and verified.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Review -->
+        <div class="step step-review" onclick="toggleStep(this)">
+          <div class="step-hd">
+            <div class="step-circle sc-review">4</div>
+            <div class="step-info">
+              <div class="step-title">AML &amp; Sanctions Screening</div>
+              <div class="step-desc">OFAC · UN · EU · INTERPOL · PEP lists — all directors and beneficial owners</div>
+            </div>
+            <span class="step-badge sb-review">Partial · 75%</span>
+            <span class="chevron-ico">▼</span>
+          </div>
+          <div class="step-body">
+            <table class="sanction-table">
+              <tr>
+                <td><div class="s-name">Marcus J. Williams</div><div class="s-meta">UBO · 42% · Director</div></td>
+                <td class="s-result sr-clear">✓ CLEAR</td>
+              </tr>
+              <tr>
+                <td><div class="s-name">Sandra T. Lee</div><div class="s-meta">UBO · 35% · Director</div></td>
+                <td class="s-result sr-clear">✓ CLEAR</td>
+              </tr>
+              <tr>
+                <td><div class="s-name">Raj Persad</div><div class="s-meta">UBO · 23% · Director</div></td>
+                <td class="s-result sr-pend">⏳ RUNNING · ~4 min</td>
+              </tr>
+              <tr>
+                <td><div class="s-name">TrinCo Holdings Ltd.</div><div class="s-meta">Entity · All lists</div></td>
+                <td class="s-result sr-clear">✓ CLEAR</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- 5 4-Eyes -->
+        <div class="step step-pending" onclick="toggleStep(this)">
+          <div class="step-hd">
+            <div class="step-circle sc-pending">5</div>
+            <div class="step-info">
+              <div class="step-title">4-Eyes Dual Authorization</div>
+              <div class="step-desc">Two independent sign-offs required — ISO 20022 · FATF R.26 compliant</div>
+            </div>
+            <span class="step-badge sb-pending">Waiting</span>
+            <span class="chevron-ico">▼</span>
+          </div>
+          <div class="step-body">
+            <div class="approver-list">
+              <div class="approver-row">
+                <div class="ap-avatar" style="background:var(--gold-dim);color:var(--gold-bright);border:1px solid var(--gold-glow)">AB</div>
+                <div class="ap-info">
+                  <div class="ap-name">Anthony Baldeosingh</div>
+                  <div class="ap-role">Compliance Officer · Primary Review</div>
+                </div>
+                <button class="sign-btn" id="sign1" onclick="event.stopPropagation();signOff(1)" disabled data-tip="Complete steps 1–4 first">Sign Off</button>
+              </div>
+              <div class="approver-row">
+                <div class="ap-avatar" style="background:var(--sky-dim);color:var(--sky);border:1px solid rgba(56,189,248,0.3)">SR</div>
+                <div class="ap-info">
+                  <div class="ap-name">Senior Risk Manager</div>
+                  <div class="ap-role">Secondary Review · Required after primary</div>
+                </div>
+                <button class="sign-btn" id="sign2" onclick="event.stopPropagation();signOff(2)" disabled data-tip="Primary sign-off required first">Sign Off</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Decision -->
+        <div class="step step-pending" onclick="toggleStep(this)">
+          <div class="step-hd">
+            <div class="step-circle sc-pending">6</div>
+            <div class="step-info">
+              <div class="step-title">Final Decision &amp; Onboarding</div>
+              <div class="step-desc">Approve, reject, or escalate to MLRO — generates immutable compliance record</div>
+            </div>
+            <span class="step-badge sb-pending">Waiting</span>
+            <span class="chevron-ico">▼</span>
+          </div>
+          <div class="step-body">
+            <div class="decision-row">
+              <div class="dec-btn dec-approve" id="dec-approve" onclick="handleDecision('approve')">✓ Approve</div>
+              <div class="dec-btn dec-reject" id="dec-reject" onclick="handleDecision('reject')">✕ Reject</div>
+              <div class="dec-btn dec-escalate" id="dec-escalate" onclick="handleDecision('escalate')">↑ Escalate to MLRO</div>
+            </div>
+            <textarea class="comment-field" rows="2" placeholder="Add a mandatory comment before submitting decision…"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Verdict -->
+      <div class="verdict-bar">
+        <div class="risk-ring">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle class="ring-bg" cx="28" cy="28" r="22"/>
+            <circle class="ring-val" cx="28" cy="28" r="22" stroke="var(--warn)"
+              stroke-dasharray="138.2" stroke-dashoffset="52.5"/>
+          </svg>
+          <div class="ring-text">
+            <div class="ring-num" style="color:var(--warn)">62</div>
+            <div class="ring-lbl">RISK</div>
+          </div>
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-title" style="color:var(--warn)">Medium-High Risk — Cannot Approve Yet</div>
+          <div class="verdict-sub">2 documents outstanding. Address discrepancy unresolved. AML screen 75% complete.</div>
+          <div class="blocking-items">
+            <span class="block-item">Tax Clearance missing</span>
+            <span class="block-item">Financials missing</span>
+            <span class="block-item">Address unresolved</span>
+            <span class="block-item">Raj Persad screening</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /workflow -->
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="rp-tabs">
+        <div class="rp-tab active" onclick="switchRP(event,'risk')">Risk</div>
+        <div class="rp-tab" onclick="switchRP(event,'activity')">Activity</div>
+        <div class="rp-tab" onclick="switchRP(event,'ai')">Ask AI</div>
+      </div>
+
+      <!-- Risk -->
+      <div class="rp-body" id="rp-risk">
+        <div class="micro-title">Risk Breakdown</div>
+        <div class="risk-breakdown">
+          <div class="rb-row">
+            <div class="rb-top"><span class="rb-label">Document Completeness</span><span class="rb-val" style="color:var(--warn)">67%</span></div>
+            <div class="rb-track"><div class="rb-fill" style="width:67%;background:var(--warn)"></div></div>
+          </div>
+          <div class="rb-row">
+            <div class="rb-top"><span class="rb-label">Registry Match</span><span class="rb-val" style="color:var(--clear)">92%</span></div>
+            <div class="rb-track"><div class="rb-fill" style="width:92%;background:var(--clear)"></div></div>
+          </div>
+          <div class="rb-row">
+            <div class="rb-top"><span class="rb-label">AML Screening</span><span class="rb-val" style="color:var(--warn)">75%</span></div>
+            <div class="rb-track"><div class="rb-fill" style="width:75%;background:var(--warn)"></div></div>
+          </div>
+          <div class="rb-row">
+            <div class="rb-top"><span class="rb-label">UBO Transparency</span><span class="rb-val" style="color:var(--clear)">100%</span></div>
+            <div class="rb-track"><div class="rb-fill" style="width:100%;background:var(--clear)"></div></div>
+          </div>
+          <div class="rb-row">
+            <div class="rb-top"><span class="rb-label">Industry Risk</span><span class="rb-val" style="color:var(--danger)">High</span></div>
+            <div class="rb-track"><div class="rb-fill" style="width:82%;background:var(--danger)"></div></div>
+          </div>
+          <div class="rb-row">
+            <div class="rb-top"><span class="rb-label">Jurisdiction (TT)</span><span class="rb-val" style="color:var(--warn)">Medium</span></div>
+            <div class="rb-track"><div class="rb-fill" style="width:55%;background:var(--warn)"></div></div>
+          </div>
+        </div>
+
+        <details style="font-size:10px;color:var(--muted);cursor:pointer;margin-bottom:14px">
+          <summary style="font-family:'Spline Sans Mono',monospace;letter-spacing:0.05em;color:var(--gold);margin-bottom:6px">How is this calculated?</summary>
+          <div style="background:var(--raised);border:1px solid var(--line);border-radius:6px;padding:10px;line-height:1.8;margin-top:4px">
+            Doc Completeness 25% · Registry Match 20% · AML Screen 25% · UBO Transparency 15% · Industry Risk 10% · Jurisdiction Risk 5%
+            <br><span style="color:var(--gold)">Weights are configurable per bank.</span>
+          </div>
+        </details>
+
+        <div class="sep"></div>
+
+        <div class="micro-title">Linked Jurisdictions</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="tag t-gold">🇻🇨 SVG</span>
+          <span class="tag t-sky">🇹🇹 Trinidad</span>
+          <span class="tag t-teal">🇧🇧 Barbados</span>
+        </div>
+
+        <div class="micro-title">Correspondent Risk Note</div>
+        <div style="background:var(--raised);border:1px solid var(--line);border-radius:6px;padding:10px;font-size:11px;color:#a8b8cc;line-height:1.7">
+          Financial Services sector triggers FATF R.26 enhanced due diligence. Correspondent banks require documented AML evidence before clearing USD transactions. This report is audit-ready for JPMorgan, Citi, and Republic Bank review.
+        </div>
+      </div>
+
+      <!-- Activity -->
+      <div class="rp-body" id="rp-activity" style="display:none">
+        <div class="micro-title">Audit Trail <span class="micro-action">Export</span></div>
+        <div class="act-item">
+          <div class="act-dot" style="background:var(--teal)"></div>
+          <div><div class="act-text">AI extracted 3 UBOs from Articles of Association — Marcus Williams, Sandra Lee, Raj Persad</div><div class="act-time">Today · 14:32</div></div>
+        </div>
+        <div class="act-item">
+          <div class="act-dot" style="background:var(--warn)"></div>
+          <div><div class="act-text">Address discrepancy flagged between bank reference (47) and CROS filing (74) — manual review required</div><div class="act-time">Today · 14:31</div></div>
+        </div>
+        <div class="act-item">
+          <div class="act-dot" style="background:var(--clear)"></div>
+          <div><div class="act-text">OFAC + UN + EU sanctions screening cleared for Marcus Williams and Sandra Lee</div><div class="act-time">Today · 14:28</div></div>
+        </div>
+        <div class="act-item">
+          <div class="act-dot" style="background:var(--clear)"></div>
+          <div><div class="act-text">Multi-registry cross-check complete — CROS TT confirmed active, no adverse records in CAIPO or BVI</div><div class="act-time">Today · 14:15</div></div>
+        </div>
+        <div class="act-item">
+          <div class="act-dot" style="background:var(--sky)"></div>
+          <div><div class="act-text">Application submitted via Republic Bank SVG API &nbsp;·&nbsp; Ref #RB-2026-004821</div><div class="act-time">Today · 13:47</div></div>
+        </div>
+        <div class="act-item">
+          <div class="act-dot" style="background:var(--clear)"></div>
+          <div><div class="act-text">Certificate of Incorporation uploaded and AI-verified · 4 data points extracted and matched</div><div class="act-time">Today · 13:52</div></div>
+        </div>
+      </div>
+
+      <!-- AI Chat -->
+      <div id="rp-ai" style="display:none;flex:1;flex-direction:column;height:calc(100% - 44px)">
+        <div class="chat-shell">
+          <div class="chat-msgs" id="chatMsgs">
+            <div class="msg">
+              <div class="msg-av av-ai">⬡</div>
+              <div class="msg-bub bub-ai">I've processed all documents for <b>TrinCo Holdings Ltd.</b> I found 3 UBOs, verified incorporation against CROS Trinidad, and flagged one address discrepancy. What would you like to know?</div>
+            </div>
+            <div class="msg">
+              <div class="msg-av av-ai">⬡</div>
+              <div class="msg-bub bub-ai">⚠ The bank reference letter shows <b>"47 Richmond St"</b> vs. CROS filing <b>"74 Richmond St"</b> — likely a transposition. Want me to draft a clarification request to the applicant?</div>
+            </div>
+            <div class="msg msg-right">
+              <div class="msg-av av-user">AB</div>
+              <div class="msg-bub bub-user">What's the PEP exposure for the three directors?</div>
+            </div>
+            <div class="msg">
+              <div class="msg-av av-ai">⬡</div>
+              <div class="msg-bub bub-ai">No PEP exposure for Marcus Williams or Sandra Lee — both clear across OFAC, UN, and EU lists. Raj Persad's screen is running — he shares a name with a minor local official in Tobago. Disambiguation completes in ~4 minutes. I'll flag you when it resolves.</div>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <input class="chat-inp" id="chatInp" placeholder="Ask about this application…" onkeydown="if(event.key==='Enter')sendChat()"/>
+            <button class="chat-send-btn" onclick="sendChat()">↑</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /right-panel -->
+  </div>
+</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<!-- Scripts: app context first, then UI logic, then AI chat -->
+<script src="src/data/app-context.js"></script>
+<script src="src/scripts/ui.js"></script>
+<script src="src/scripts/ai-chat.js"></script>
+</body>
+</html>

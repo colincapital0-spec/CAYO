@@ -1,0 +1,19 @@
+{
+  "name": "cayo-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cayo — compliance intelligence prototype for Caribbean payment infrastructure",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "fintech",
+    "compliance",
+    "kyb",
+    "aml",
+    "caribbean",
+    "payments"
+  ],
+  "license": "UNLICENSED"
+}
