@@ -1,0 +1,52 @@
+/* ============================================
+   Cayo — Design Tokens
+   Fonts, color palette, radii. Change the look here.
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Space+Grotesk:wght@300;400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Light monochrome — paper, ink, and graphite. One near-black accent.
+     Restraint is the whole point: no color story, just tone and type. */
+  --void: #ffffff;      /* pure paper — app background */
+  --deep: #fbfbfa;      /* faint warm off-white — sidebar / rails */
+  --surface: #ffffff;   /* card */
+  --surface2: #f7f7f6;  /* elevated / hover card */
+  --raised: #f0f0ee;    /* hover / track */
+  --line: rgba(23,23,23,0.10);
+  --line2: rgba(23,23,23,0.06);
+
+  /* Ink — the single accent is near-black graphite */
+  --gold: #1a1a1a;
+  --gold-bright: #000000;
+  --gold-dim: rgba(23,23,23,0.05);
+  --gold-glow: rgba(23,23,23,0.14);
+
+  /* Status tints — desaturated, almost grey, just enough to read */
+  --teal: #4b6b62;         /* muted sage for AI + verified */
+  --teal-dim: rgba(75,107,98,0.08);
+
+  --rose: #8f4a52;         /* muted brick for alerts */
+  --rose-dim: rgba(143,74,82,0.08);
+
+  --sky: #4a5a7a;          /* muted slate for secondary info */
+  --sky-dim: rgba(74,90,122,0.08);
+
+  --sand: #171717;         /* ink — headings */
+  --text: #262626;         /* near-black body */
+  --muted: #737373;        /* graphite */
+  --muted2: #a3a3a3;       /* light graphite */
+
+  --clear: #4b6b62;        /* sage = success */
+  --clear-dim: rgba(75,107,98,0.08);
+  --warn: #8a6d3b;         /* muted ochre */
+  --warn-dim: rgba(138,109,59,0.08);
+  --danger: #8f4a52;       /* muted brick */
+  --danger-dim: rgba(143,74,82,0.08);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 5px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
